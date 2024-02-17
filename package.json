@@ -1,0 +1,24 @@
+{
+  "name": "auth-services",
+  "version": "1.0.0",
+  "description": "authentication service for user management",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robinmahto/auth-services.git"
+  },
+  "keywords": [
+    "node.js",
+    "express.js",
+    "TypeScript"
+  ],
+  "author": "Robin Mahto <robinmahto1999@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/robinmahto/auth-services/issues"
+  },
+  "homepage": "https://github.com/robinmahto/auth-services#readme"
+}
