@@ -1,5 +1,7 @@
+
+const username = 'robinmahto'
 function printName(username: string): string {
     return username;
 }
 
-console.log(printName('robin mahto'));
+console.log(printName(username));
