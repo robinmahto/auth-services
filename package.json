@@ -1,28 +1,31 @@
 {
-  "name": "auth-services",
-  "version": "1.0.0",
-  "description": "authentication service for user management",
-  "main": "server.js",
-  "scripts": {
-    "dev": "node ./dist/server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/robinmahto/auth-services.git"
-  },
-  "keywords": [
-    "node.js",
-    "express.js",
-    "TypeScript"
-  ],
-  "author": "Robin Mahto <robinmahto1999@gmail.com>",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/robinmahto/auth-services/issues"
-  },
-  "homepage": "https://github.com/robinmahto/auth-services#readme",
-  "devDependencies": {
-    "@types/node": "^20.11.19",
-    "typescript": "^5.3.3"
-  }
+    "name": "auth-services",
+    "version": "1.0.0",
+    "description": "authentication service for user management",
+    "main": "server.js",
+    "scripts": {
+        "dev": "node ./dist/server.js",
+        "formate:check": "prettier . --check",
+        "formate:fix": "prettier . --write"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/robinmahto/auth-services.git"
+    },
+    "keywords": [
+        "node.js",
+        "express.js",
+        "TypeScript"
+    ],
+    "author": "Robin Mahto <robinmahto1999@gmail.com>",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/robinmahto/auth-services/issues"
+    },
+    "homepage": "https://github.com/robinmahto/auth-services#readme",
+    "devDependencies": {
+        "@types/node": "^20.11.19",
+        "prettier": "3.2.5",
+        "typescript": "^5.3.3"
+    }
 }
