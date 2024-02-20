@@ -1,38 +1,40 @@
 {
-    "name": "auth-services",
-    "version": "1.0.0",
-    "description": "authentication service for user management",
-    "main": "server.js",
-    "scripts": {
-        "dev": "node ./dist/server.js",
-        "formate:check": "prettier . --check",
-        "formate:fix": "prettier . --write",
-        "lint:check": "eslint .",
-        "lint:fix": "eslint . --fix"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/robinmahto/auth-services.git"
-    },
-    "keywords": [
-        "node.js",
-        "express.js",
-        "TypeScript"
-    ],
-    "author": "Robin Mahto <robinmahto1999@gmail.com>",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/robinmahto/auth-services/issues"
-    },
-    "homepage": "https://github.com/robinmahto/auth-services#readme",
-    "devDependencies": {
-        "@types/node": "^20.11.19",
-        "@typescript-eslint/eslint-plugin": "^7.0.1",
-        "@typescript-eslint/parser": "^7.0.1",
-        "eslint": "^8.56.0",
-        "eslint-config-prettier": "^9.1.0",
-        "prettier": "3.2.5",
-        "typescript": "^5.3.3",
-        "typescript-eslint": "^7.0.1"
-    }
+  "name": "auth-services",
+  "version": "1.0.0",
+  "description": "authentication service for user management",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node ./dist/server.js",
+    "formate:check": "prettier . --check",
+    "formate:fix": "prettier . --write",
+    "lint:check": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robinmahto/auth-services.git"
+  },
+  "keywords": [
+    "node.js",
+    "express.js",
+    "TypeScript"
+  ],
+  "author": "Robin Mahto <robinmahto1999@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/robinmahto/auth-services/issues"
+  },
+  "homepage": "https://github.com/robinmahto/auth-services#readme",
+  "devDependencies": {
+    "@types/node": "^20.11.19",
+    "@typescript-eslint/eslint-plugin": "^7.0.1",
+    "@typescript-eslint/parser": "^7.0.1",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "husky": "^9.0.11",
+    "prettier": "3.2.5",
+    "typescript": "^5.3.3",
+    "typescript-eslint": "^7.0.1"
+  }
 }
