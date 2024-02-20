@@ -3,7 +3,7 @@ module.exports = {
     extends: [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended-type-checked",
-        "prettier"
+        "prettier",
     ],
     parser: "@typescript-eslint/parser",
     plugins: ["@typescript-eslint"],
@@ -12,7 +12,7 @@ module.exports = {
         project: true,
         tsconfigRootDir: __dirname,
     },
-    rules:{
-        "dot-notation":"error"
-    }
+    rules: {
+        "dot-notation": "error",
+    },
 };

@@ -1,9 +1,9 @@
-
-const username = 'robinmahto'
+const username = "robinmahto";
 function printName(username: string): string {
     const users = {
-        name:"robin"
-    } console.log(users['name'])
+        name: "robin",
+    };
+    console.log(users.name);
     return username;
 }
 
