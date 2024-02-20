@@ -1,1 +1,2 @@
-npm lint:check
+npm run lint:fix
+npm run formate:fix
