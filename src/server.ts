@@ -1,10 +1,13 @@
-const username = "robinmahto";
-function printName(username: string): string {
-    const users = {
-        name: "robin",
-    };
-    console.log(users.name);
-    return username;
-}
+import app from "./app";
+import { Config } from "./config/config";
 
-console.log(printName(username));
+const startServer = () => {
+    try {
+        const PORT = Config.PORT;
+        app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+startServer();
