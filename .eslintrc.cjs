@@ -15,6 +15,6 @@ module.exports = {
     rules: {
         "dot-notation": "error",
         "@typescript-eslint/no-unused-vars": "off", // Handled by TypeScript
-        "no-undef":"off",
+        "no-undef": "off",
     },
 };

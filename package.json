@@ -62,5 +62,5 @@
     },
     "jest": {
         "verbose": true
-      }
+    }
 }
