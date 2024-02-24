@@ -7,7 +7,9 @@ const app = express();
 app.use(express.json());
 
 app.get("/", (_req, res) => {
-    res.send(JSON.stringify({ message: "Welcome to the Auth services" }));
+    res.status(200).send(
+        JSON.stringify({ message: "Welcome to the Auth services" }),
+    );
 });
 
 // middlware for error handling
