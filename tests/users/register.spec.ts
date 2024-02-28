@@ -18,6 +18,24 @@ describe("POST /auth/register", () => {
             //  Assert
             expect(response.statusCode).toBe(201);
         });
+
+        it("it should return valid json", async () => {
+            // Arrange
+            const userData = {
+                firstName: "robin",
+                lastName: "mahto",
+                email: "robin@gmail.com",
+                password: "secret",
+            };
+            // Act
+            const response = await request(app)
+                .post("/auth/register")
+                .send(userData);
+            //  Assert
+            expect(response.headers["content-type"]).toEqual(
+                expect.stringContaining("json"),
+            );
+        });
     });
 
     describe("Missing all fields", () => {});

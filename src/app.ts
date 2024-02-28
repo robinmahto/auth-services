@@ -1,16 +1,13 @@
 import express, { Request, Response, NextFunction } from "express";
 import logger from "./config/logger";
 import { HttpError } from "http-errors";
+import authRouter from "./routes/auth.router";
 
 const app = express();
-
 app.use(express.json());
 
-app.get("/", (_req, res) => {
-    res.status(200).send(
-        JSON.stringify({ message: "Welcome to the Auth services" }),
-    );
-});
+// auth
+app.use("/auth", authRouter);
 
 // middlware for error handling
 app.use((err: HttpError, _req: Request, res: Response, _next: NextFunction) => {
