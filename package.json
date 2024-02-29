@@ -4,7 +4,7 @@
    "description": "authentication service for user management",
    "main": "./src/server.ts",
    "scripts": {
-      "dev": "nodemon ./src/server.ts",
+      "dev": "cross-env NODE_ENV=dev nodemon ./src/server.ts",
       "formate:check": "prettier . --check",
       "formate:fix": "prettier . --write",
       "lint:check": "eslint .",
@@ -37,6 +37,7 @@
       "@types/winston": "^2.4.4",
       "@typescript-eslint/eslint-plugin": "^7.0.1",
       "@typescript-eslint/parser": "^7.0.1",
+      "cross-env": "^7.0.3",
       "eslint": "^8.56.0",
       "eslint-config-prettier": "^9.1.0",
       "husky": "^9.0.11",
