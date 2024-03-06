@@ -64,13 +64,14 @@ describe("POST /auth/register", () => {
                 password: "secret",
             };
             // Act
-            const response = await request(app)
-                .post("/auth/register")
-                .send(userData);
+            await request(app).post("/auth/register").send(userData);
             //  Assert
             const userRepository = connection.getRepository(User);
-            const users = userRepository.find();
+            const users = await userRepository.find();
             expect(users).toHaveLength(1);
+            expect(users[0].firstName).toBe(userData.firstName);
+            expect(users[0].lastName).toBe(userData.lastName);
+            expect(users[0].email).toBe(userData.email);
         });
     });
 

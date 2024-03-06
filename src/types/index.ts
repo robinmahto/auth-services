@@ -1,12 +1,12 @@
 import { Request } from "express";
 
-export interface userData {
+export interface UserData {
     firstName: string;
     lastName: string;
     email: string;
     password: string;
 }
 
-export interface registerDataRequest extends Request {
-    body: userData;
+export interface RegisterDataRequest extends Request {
+    body: UserData;
 }
