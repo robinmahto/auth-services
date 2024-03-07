@@ -1,27 +1,39 @@
-import { Response } from "express";
+import { NextFunction, Response } from "express";
 import { RegisterDataRequest } from "../types";
 import { UserService } from "../services/UserService";
+import { Logger } from "winston";
 
 export class AuthController {
-    constructor(private userService: UserService) {}
+    constructor(
+        private userService: UserService,
+        private logger: Logger,
+    ) {}
 
-    async register(req: RegisterDataRequest, res: Response) {
+    async register(
+        req: RegisterDataRequest,
+        res: Response,
+        next: NextFunction,
+    ) {
         const { firstName, lastName, email, password } = req.body;
-
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this.logger.debug("new request to register a user", {
+            firstName,
+            lastName,
+            email,
+            password: "*****",
+        });
         try {
-            await this.userService
-                .create({ firstName, lastName, email, password })
-                .catch((err) => {
-                    if (err.message === "ValidationError")
-                        throw new Error("Invalid data");
-                    else throw err;
-                })
-                .then(() => {
-                    return res.status(201).json({ message: "User created" });
-                });
+            const user = await this.userService.create({
+                firstName,
+                lastName,
+                email,
+                password,
+            });
+            this.logger.info("user has been created", { id: user });
+            res.status(201).json({ id: user });
         } catch (error) {
-            console.error("Error registering user:", error);
-            res.status(500).json({ message: "Error registering user" });
+            next(error);
+            return;
         }
     }
 }

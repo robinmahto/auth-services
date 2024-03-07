@@ -53,7 +53,8 @@
     },
     "lint-staged": {
         "*.ts": [
-            "npm run formate:fix"
+            "npm run formate:fix",
+            "npm run lint:fix"
         ]
     },
     "dependencies": {
