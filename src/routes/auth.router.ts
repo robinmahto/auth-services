@@ -1,9 +1,11 @@
-import express from "express";
+import express, { Request, NextFunction, Response } from "express";
+import { body } from "express-validator";
 import { AuthController } from "../controllers/AuthController";
 import { UserService } from "../services/UserService";
 import { AppDataSource } from "../config/data-source";
 import { User } from "../entity/User";
 import logger from "../config/logger";
+import registerValidator from "../validators/register-validator";
 const authRouter = express.Router();
 
 const userRepository = AppDataSource.getRepository(User);
@@ -16,8 +18,11 @@ authRouter.get("/", (_req, res) => {
     );
 });
 
-authRouter.post("/register", (req, res, next) =>
-    authController.register(req, res, next),
+authRouter.post(
+    "/register",
+    registerValidator,
+    (req: Request, res: Response, next: NextFunction) =>
+        authController.register(req, res, next),
 );
 
 export default authRouter;
