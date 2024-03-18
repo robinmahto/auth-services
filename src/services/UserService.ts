@@ -15,6 +15,13 @@ export class UserService {
         if (existingUser) {
             throw createHttpError(400, "Email already in exists");
         }
+
+        // email should be valid
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!regex.test(email)) {
+            throw createHttpError(400, "Invalid email format");
+        }
+
         // hashed password
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
