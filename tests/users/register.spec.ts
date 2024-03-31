@@ -165,6 +165,9 @@ describe("POST /auth/register", () => {
             });
             expect(accessToken).not.toBeNull();
             expect(refreshToken).not.toBeNull();
+
+            expect(accessToken).toBeTruthy();
+            expect(refreshToken).toBeTruthy();
         });
     });
 

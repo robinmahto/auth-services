@@ -1,5 +1,4 @@
 import express, { Request, NextFunction, Response } from "express";
-import { body } from "express-validator";
 import { AuthController } from "../controllers/AuthController";
 import { UserService } from "../services/UserService";
 import { AppDataSource } from "../config/data-source";
