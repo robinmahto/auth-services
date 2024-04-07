@@ -17,7 +17,7 @@ export default checkSchema({
         trim: true,
     },
     password: {
-        errorMessage: "Email is required.",
+        errorMessage: "Password is required.",
         notEmpty: true,
         trim: true,
     },
