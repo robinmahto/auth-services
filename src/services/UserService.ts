@@ -38,4 +38,8 @@ export class UserService {
             throw error;
         }
     }
+
+    async getUserByEmail(email: string) {
+        return await this.userRepository.findOne({ where: { email } });
+    }
 }

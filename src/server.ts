@@ -19,4 +19,11 @@ const startServer = async () => {
     }
 };
 
-startServer();
+startServer().catch((error) => {
+    if (error instanceof Error) {
+        logger.error(error.message);
+        setTimeout(() => {
+            process.exit(1);
+        }, 1000);
+    }
+});
