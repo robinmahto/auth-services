@@ -6,12 +6,14 @@ import { validationResult } from "express-validator";
 import { JwtPayload } from "jsonwebtoken";
 import { TokenService } from "../services/TokenService";
 import createHttpError from "http-errors";
+import { CredentialService } from "../services/CredentialService";
 
 export class AuthController {
     constructor(
         private userService: UserService,
         private logger: Logger,
         private tokenService: TokenService,
+        private credentialService: CredentialService,
     ) {}
 
     async register(
@@ -76,11 +78,11 @@ export class AuthController {
     }
 
     async login(req: RegisterDataRequest, res: Response, next: NextFunction) {
-        const { email, password } = req.body;
         const result = validationResult(req);
         if (!result.isEmpty()) {
             return res.status(400).json({ erros: result.array() });
         }
+        const { email, password } = req.body;
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         this.logger.debug("new request to register a user", {
             email,
@@ -88,19 +90,35 @@ export class AuthController {
         });
 
         try {
-            const user = this.userService.getUserByEmail(email);
+            const user = await this.userService.getUserByEmail(email);
             if (!user) {
                 const error = createHttpError(
                     400,
                     "Email or password does not match",
                 );
-                throw error;
+                next(error);
+                return;
+            }
+
+            // compare password
+            const passwordMatch = await this.credentialService.comparePassword(
+                password,
+                user.password,
+            );
+            if (!passwordMatch) {
+                const error = createHttpError(
+                    400,
+                    "Email or password does not match",
+                );
+                next(error);
+                return;
             }
             // creating  the token and sending it back as response
             const payload: JwtPayload = {
                 sub: String(user.id),
                 role: user.role,
             };
+
             const accessToken = this.tokenService.generateAccessToken(payload);
 
             // persist the refresh token
@@ -124,6 +142,7 @@ export class AuthController {
                 maxAge: 1000 * 60 * 60 * 24 * 365, // 1hr
                 httpOnly: true, // very important
             });
+            this.logger.info(`User ${user.email} logged in`);
             res.json({ id: user.id });
         } catch (error) {
             next(error);

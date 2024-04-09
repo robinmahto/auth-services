@@ -7,12 +7,20 @@ import logger from "../config/logger";
 import registerValidator from "../validators/register-validator";
 import loginValidator from "../validators/login-validator";
 import { TokenService } from "../services/TokenService";
+import { CredentialService } from "../services/CredentialService";
+
 const authRouter = express.Router();
 
 const userRepository = AppDataSource.getRepository(User);
 const userService = new UserService(userRepository);
 const tokenService = new TokenService();
-const authController = new AuthController(userService, logger, tokenService);
+const credentialService = new CredentialService();
+const authController = new AuthController(
+    userService,
+    logger,
+    tokenService,
+    credentialService,
+);
 
 authRouter.get("/", (_req, res) => {
     res.status(200).send(
