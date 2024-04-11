@@ -149,4 +149,13 @@ export class AuthController {
             return;
         }
     }
+
+    async self(req: RegisterDataRequest, res: Response, next: NextFunction) {
+        try {
+            await Notification.requestPermission();
+            res.json({});
+        } catch (error) {
+            next(error);
+        }
+    }
 }
