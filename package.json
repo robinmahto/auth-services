@@ -1,0 +1,11 @@
+{
+  "name": "auth-services",
+  "version": "1.0.0",
+  "description": "it is a authentication service",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node src/server.js"
+  },
+  "author": "robin mahto",
+  "license": "ISC"
+}
