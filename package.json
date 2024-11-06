@@ -2,10 +2,14 @@
   "name": "auth-services",
   "version": "1.0.0",
   "description": "it is a authentication service",
-  "main": "server.js",
+  "main": "server.ts",
   "scripts": {
-    "dev": "node src/server.js"
+    "dev": "node dist/server.js"
   },
   "author": "robin mahto",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "typescript": "^5.6.3"
+  }
 }
