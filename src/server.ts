@@ -1,11 +1,14 @@
 import { Config } from './config';
+import app from './app';
 
-function welcome(name: string) {
-  // console.log('Welcome to the game', name, Config.PORT);
-  return {
-    message: `Welcome to the game ${name}`,
-    port: Config.PORT,
-  };
-}
+const startServer = () => {
+  try {
+    app.listen(Config.PORT, () =>
+      console.log(`server listing on port: ${Config.PORT}`),
+    );
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-welcome('jhon');
+startServer();
