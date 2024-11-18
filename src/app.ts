@@ -1,9 +1,25 @@
-import express from 'express';
+import express, { NextFunction, Request, Response } from 'express';
+import logger from './config/logger';
+import { HttpError } from 'http-errors';
 
 const app = express();
 
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
   res.json({ message: 'welcome to auth service' });
+});
+
+// global error handler
+app.use((err: HttpError, _req: Request, res: Response, _next: NextFunction) => {
+  logger.error(err.message);
+  const statusCode = err.statusCode || 500;
+  res.status(statusCode).json({
+    errors: [
+      {
+        message: err.message,
+        type: err.name,
+      },
+    ],
+  });
 });
 
 export default app;
