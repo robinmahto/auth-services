@@ -5,7 +5,7 @@ import { HttpError } from 'http-errors';
 const app = express();
 
 app.get('/', (_req, res) => {
-  res.json({ message: 'welcome to auth service' });
+  res.status(200).json({ message: 'welcome to auth service' });
 });
 
 // global error handler
