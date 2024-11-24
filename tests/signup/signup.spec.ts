@@ -20,5 +20,25 @@ describe('POST auth/signup', () => {
       //  Assert
       expect(response.status).toBe(201);
     });
+
+    it('should return valid json', async () => {
+      // Arrange
+      const userPayload = {
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'john.doe@example.com',
+        password: 'password123',
+      };
+
+      // Act
+      const response = await request(app)
+        .post('/auth/signup')
+        .send(userPayload);
+
+      //  Assert
+      expect(
+        (response.headers as Record<string, string>)['content-type'],
+      ).toEqual(expect.stringContaining('json'));
+    });
   });
 });
