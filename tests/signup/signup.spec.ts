@@ -40,5 +40,22 @@ describe('POST auth/signup', () => {
         (response.headers as Record<string, string>)['content-type'],
       ).toEqual(expect.stringContaining('json'));
     });
+
+    it('should persist the user in the database', async () => {
+      // Arrange
+      const userPayload = {
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'john.doe@example.com',
+        password: 'password123',
+      };
+
+      // Act
+      const response = await request(app)
+        .post('/auth/signup')
+        .send(userPayload);
+
+      // Assert
+    });
   });
 });
