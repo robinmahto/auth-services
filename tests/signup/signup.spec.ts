@@ -2,7 +2,6 @@ import request from 'supertest';
 import app from '../../src/app';
 import { DataSource } from 'typeorm';
 import { AppDataSource } from '../../src/config/data-source';
-import { truncateTables } from '../utils';
 import { User } from '../../src/entity/User';
 
 describe('POST auth/signup', () => {
@@ -14,7 +13,8 @@ describe('POST auth/signup', () => {
 
   beforeEach(async () => {
     // database truncate
-    await truncateTables(connection);
+    await connection.dropDatabase();
+    await connection.synchronize();
   });
 
   afterAll(async () => {
