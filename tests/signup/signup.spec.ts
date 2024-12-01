@@ -78,5 +78,24 @@ describe('POST auth/signup', () => {
       const users = await userRepository.find();
       expect(users).toHaveLength(1);
     });
+
+    it('should store the hashed password in the database', async () => {
+      // Arrange
+      const userPayload = {
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'john.doe@example.com',
+        password: 'password123',
+      };
+
+      // Act
+      await request(app).post('/auth/signup').send(userPayload);
+
+      // Assert
+      const userRepository = connection.getRepository(User);
+      const users = await userRepository.find();
+      expect(users[0].password).not.toBe(userPayload.password);
+      expect(users[0].password).toHaveLength(60);
+    });
   });
 });
