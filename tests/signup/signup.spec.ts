@@ -98,4 +98,22 @@ describe('POST auth/signup', () => {
       expect(users[0].password).toHaveLength(60);
     });
   });
+
+  describe('missing all fields', () => {
+    it('should return 400 status code if email field is missing', async () => {
+      // Arrange
+      const userPayload = {
+        firstName: 'John',
+        lastName: 'Doe',
+        email: '',
+        password: 'password123',
+      };
+      // Act
+      const response = await request(app)
+        .post('/auth/signup')
+        .send(userPayload);
+      // Assert
+      expect(response.status).toBe(400);
+    });
+  });
 });
