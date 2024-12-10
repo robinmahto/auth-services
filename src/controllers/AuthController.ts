@@ -38,6 +38,25 @@ export class AuthController {
         password,
       });
       this.logger.info('User has been registered', { id: user });
+      const accessToken = 'rewrwetergerert';
+      const refreshToken = 'efsfsdvdfgdfgdfg';
+
+      // accessToken
+      res.cookie('accessToken', accessToken, {
+        httpOnly: true,
+        maxAge: 60 * 60 * 24 * 30, // 30 days
+        sameSite: 'strict',
+        domain: 'localhost',
+      });
+
+      // refreshToken
+      res.cookie('refreshToken', refreshToken, {
+        httpOnly: true,
+        maxAge: 60 * 60 * 24 * 30 * 20, // 30 days
+        sameSite: 'strict',
+        domain: 'localhost',
+      });
+
       res.status(201).json({ id: user });
     } catch (error) {
       next(error);
