@@ -133,3 +133,4 @@ dist
 .env.test
 .env.dev
 
+certs
