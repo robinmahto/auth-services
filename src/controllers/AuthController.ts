@@ -52,7 +52,7 @@ export class AuthController {
       // refreshToken
       res.cookie('refreshToken', refreshToken, {
         httpOnly: true,
-        maxAge: 60 * 60 * 24 * 30 * 20, // 30 days
+        maxAge: 1000 * 60 * 60 * 24 * 365, // 1y
         sameSite: 'strict',
         domain: 'localhost',
       });
