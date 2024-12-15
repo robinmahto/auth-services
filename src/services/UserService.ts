@@ -7,7 +7,12 @@ import bcrypt from 'bcrypt';
 
 export class UserService {
   constructor(private userRepository: Repository<User>) {}
-  async create({ firstName, lastName, email, password }: UserData) {
+  async create({
+    firstName,
+    lastName,
+    email,
+    password,
+  }: UserData): Promise<any> {
     // check email is already exists
     const existingUser = await this.userRepository.findOne({
       where: { email },
