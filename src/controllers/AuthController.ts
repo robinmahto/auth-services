@@ -18,8 +18,6 @@ export class AuthController {
   async signup(req: SignupUserRequest, res: Response, next: NextFunction) {
     const result = validationResult(req);
 
-    console.log('result: ', result.isEmpty());
-
     if (!result.isEmpty()) {
       res.status(400).json({ erros: result.array() });
       return;
@@ -43,6 +41,7 @@ export class AuthController {
         email,
         password,
       });
+
       this.logger.info('User has been registered', { id: user.id });
 
       // Persist the refresh token
@@ -74,7 +73,7 @@ export class AuthController {
         domain: 'localhost',
       });
 
-      res.status(201).json({ id: user.id });
+      res.status(201).json({ data: user });
     } catch (error) {
       next(error);
     }
