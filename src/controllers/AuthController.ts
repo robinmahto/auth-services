@@ -5,8 +5,6 @@ import { Logger } from 'winston';
 import createHttpError from 'http-errors';
 import { validationResult } from 'express-validator';
 import { TokenService } from '../services/TokenService';
-import { AppDataSource } from '../config/data-source';
-import { RefreshToken } from '../entity/RefreshToken';
 
 export class AuthController {
   userService: UserService;
@@ -19,7 +17,10 @@ export class AuthController {
   }
   async signup(req: SignupUserRequest, res: Response, next: NextFunction) {
     const result = validationResult(req);
-    if (result.isEmpty()) {
+
+    console.log('result: ', result.isEmpty());
+
+    if (!result.isEmpty()) {
       res.status(400).json({ erros: result.array() });
       return;
     }

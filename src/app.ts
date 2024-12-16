@@ -12,6 +12,7 @@ app.get('/', (_req, res) => {
 
 // middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use('/auth', authRouter);
