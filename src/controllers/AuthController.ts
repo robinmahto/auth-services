@@ -5,6 +5,7 @@ import { Logger } from 'winston';
 import createHttpError from 'http-errors';
 import { validationResult } from 'express-validator';
 import { TokenService } from '../services/TokenService';
+import { CredentialService } from '../services/CredentialService';
 
 export class AuthController {
   userService: UserService;
@@ -12,6 +13,7 @@ export class AuthController {
     userService: UserService,
     private logger: Logger,
     private tokenService: TokenService,
+    private credentialService: CredentialService,
   ) {
     this.userService = userService;
   }
@@ -94,16 +96,9 @@ export class AuthController {
       password: '**********',
     });
 
-    // generate token
-
-    // add tokens to cookies
-
-    // return the response Id
-
     try {
       //check if email exists in database
       const user = await this.userService.findByEmail(email);
-
       if (!user) {
         const error = createHttpError(400, 'Email or password does not match.');
         next(error);
@@ -111,21 +106,35 @@ export class AuthController {
       }
 
       // comapre password
+      const passwordMatch = await this.credentialService.comparePassword(
+        password,
+        user.password,
+      );
+      if (!passwordMatch) {
+        const error = createHttpError(400, 'Email or password does not match.');
+        next(error);
+        return;
+      }
 
-      // Persist the refresh token
+      // generate token
+
+      // Persist the refresh token in database
       const newRefreshToken = await this.tokenService.persistRefreshToken(user);
+
+      //generate Access token
       const payload = {
         sub: String(user.id),
         role: user.role,
       };
-
       const accessToken = this.tokenService.generateAccessToken(payload);
+
+      // generate refresh token
       const refreshToken = this.tokenService.generateRefreshToken({
         ...payload,
         id: String(newRefreshToken.id),
       });
 
-      // accessToken
+      // add accessToken in cookie
       res.cookie('accessToken', accessToken, {
         httpOnly: true,
         maxAge: 60 * 60 * 24 * 30, // 30 days
@@ -133,15 +142,16 @@ export class AuthController {
         domain: 'localhost',
       });
 
-      // refreshToken
+      // add refreshToken in cookie
       res.cookie('refreshToken', refreshToken, {
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24 * 365, // 1y
         sameSite: 'strict',
         domain: 'localhost',
       });
-
-      res.status(201).json({ data: user });
+      this.logger.info('user has been login', { id: user.id });
+      // return the response Id
+      res.status(200).json({ data: user.id });
     } catch (error) {
       next(error);
     }
