@@ -26,10 +26,7 @@ export class AuthController {
     }
 
     const { firstName, lastName, email, password } = req.body;
-    if (!email) {
-      const err = createHttpError(400, 'Email is required');
-      return next(err);
-    }
+
     this.logger.debug('New request to register a user', {
       firstName,
       lastName,
@@ -75,7 +72,7 @@ export class AuthController {
         domain: 'localhost',
       });
 
-      res.status(201).json({ data: user });
+      res.status(201).json({ data: user.id });
     } catch (error) {
       next(error);
     }
