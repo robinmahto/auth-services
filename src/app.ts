@@ -3,6 +3,8 @@ import express, { NextFunction, Request, Response } from 'express';
 import logger from './config/logger';
 import { HttpError } from 'http-errors';
 import authRouter from './routes/auth';
+import cors from 'cors';
+import { Config } from './config';
 
 const app = express();
 
@@ -13,6 +15,12 @@ app.get('/', (_req, res) => {
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(
+  cors({
+    origin: [`${Config.CORS_ORIGIN_URL}`],
+    credentials: true,
+  }),
+);
 
 // Routes
 app.use('/auth', authRouter);
