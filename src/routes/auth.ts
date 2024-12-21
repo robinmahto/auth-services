@@ -37,4 +37,8 @@ router.post(
     authController.login(req, res, next),
 );
 
+router.post('/whoami', (req: Request, res: Response) =>
+  authController.whoami(req, res),
+);
+
 export default router;
