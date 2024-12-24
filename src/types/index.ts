@@ -10,3 +10,10 @@ export type UserData = {
 export interface SignupUserRequest extends Request {
   body: UserData;
 }
+
+export interface AuthRequest extends Request {
+  auth: {
+    id: number;
+    role: number;
+  };
+}

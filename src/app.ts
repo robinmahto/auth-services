@@ -5,6 +5,7 @@ import { HttpError } from 'http-errors';
 import authRouter from './routes/auth';
 import cors from 'cors';
 import { Config } from './config';
+import cookieParse from 'cookie-parser';
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.get('/', (_req, res) => {
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParse());
 app.use(
   cors({
     origin: [`${Config.CORS_ORIGIN_URL}`],

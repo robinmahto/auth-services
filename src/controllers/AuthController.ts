@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { SignupUserRequest } from '../types';
+import { AuthRequest, SignupUserRequest } from '../types';
 import { UserService } from '../services/UserService';
 import { Logger } from 'winston';
 import createHttpError from 'http-errors';
@@ -154,8 +154,9 @@ export class AuthController {
     }
   }
 
-  async users(req: Request, res: Response) {
+  async users(req: AuthRequest, res: Response) {
     // token req.auth.id
-    // res.json({})
+    // const userId = req.auth.id;
+    // res.json({userId})
   }
 }
