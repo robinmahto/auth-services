@@ -154,5 +154,8 @@ export class AuthController {
     }
   }
 
-  async whoami(req: Request, res: Response) {}
+  async users(req: Request, res: Response) {
+    // token req.auth.id
+    // res.json({})
+  }
 }
