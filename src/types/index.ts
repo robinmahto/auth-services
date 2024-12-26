@@ -13,7 +13,7 @@ export interface SignupUserRequest extends Request {
 
 export interface AuthRequest extends Request {
   auth: {
-    id: number;
+    id: string;
     role: number;
   };
 }
