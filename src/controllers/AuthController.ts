@@ -148,7 +148,7 @@ export class AuthController {
       });
       this.logger.info('user has been login', { id: user.id });
       // return the response Id
-      res.status(200).json({ data: user.id });
+      res.status(200).json({ data: user, accessToken, refreshToken });
     } catch (error) {
       next(error);
     }
@@ -158,6 +158,6 @@ export class AuthController {
     // token req.auth.id
     const userId = req.auth.id;
     const user = await this.userService.findById(Number(userId));
-    res.json({ user });
+    res.json({ ...user, password: undefined });
   }
 }

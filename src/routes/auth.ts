@@ -39,7 +39,7 @@ router.post(
     authController.login(req, res, next),
 );
 
-router.post('/users', authenticate, (req: Request, res: Response) =>
+router.get('/users', authenticate, (req: Request, res: Response) =>
   authController.users(req as AuthRequest, res),
 );
 
