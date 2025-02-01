@@ -3,7 +3,6 @@ import fs from 'fs';
 import path from 'path';
 import createHttpError from 'http-errors';
 import { Config } from '../config';
-import { AppDataSource } from '../config/data-source';
 import { RefreshToken } from '../entity/RefreshToken';
 import { User } from '../entity/User';
 import { Repository } from 'typeorm';
